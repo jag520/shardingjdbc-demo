@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vancent.shardingjdbc.dao.OrdersMapper">
+    <resultMap id="OrdersResultMap" type="com.vancent.shardingjdbc.entity.Orders">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="parent_orders_uuid" property="parentOrdersUuid" jdbcType="VARCHAR"/>
+        <result column="parent_orders_id" property="parentOrdersId" jdbcType="VARCHAR"/>
+        <result column="order_origin" property="orderOrigin" jdbcType="CHAR"/>
+        <result column="order_type" property="orderType" jdbcType="CHAR"/>
+        <result column="adddate" property="adddate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column">
+        id,parent_orders_uuid,parent_orders_id,order_origin,order_type,adddate
+    </sql>
+    <insert id="insertOrders" parameterType="com.vancent.shardingjdbc.entity.Orders">
+        INSERT INTO orders(
+        <include refid="Base_Column"/>
+        )
+        VALUES(#{id},#{parentOrdersUuid},#{parentOrdersId},#{orderOrigin},#{orderType},#{adddate})
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="OrdersResultMap">
+        SELECT
+        <include refid="Base_Column"/>
+        FROM orders WHERE id=#{id}
+    </select>
+
+    <select id="queryOrderByParam" resultMap="OrdersResultMap">
+        SELECT
+        <include refid="Base_Column"/>
+        FROM orders
+        WHERE
+          1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="parentOrdersUuid != null">
+            and parent_orders_uuid = #{parentOrdersUuid}
+        </if>
+        <if test="parentOrdersId != null">
+            and parent_orders_id = #{parentOrdersId}
+        </if>
+        <if test="orderOrigin != null">
+            and order_origin = #{orderOrigin}
+        </if>
+        <if test="orderType != null">
+            and order_type = #{orderType}
+        </if>
+    </select>
+
+    <select id="queryOrdersPage" resultMap="OrdersResultMap">
+        SELECT
+        <include refid="Base_Column"/>
+        FROM  orders
+        WHERE id &gt;= #{id}
+        LIMIT #{current},#{pageSize}
+    </select>
+
+    <select id="queryByIds" parameterType="java.util.List" resultMap="OrdersResultMap">
+        SELECT
+        <include refid="Base_Column"/>
+        FROM  orders
+        <where>
+            id IN
+            <foreach collection="ids" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="queryBetweenDate" resultMap="OrdersResultMap">
+        SELECT
+        <include refid="Base_Column"/>
+        FROM  orders
+        WHERE adddate BETWEEN #{startTime} AND #{endTime}
+    </select>
+</mapper>

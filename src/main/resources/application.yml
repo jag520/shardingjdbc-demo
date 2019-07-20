@@ -1,0 +1,20 @@
+#端口号
+server:
+  port: 8283
+
+logging.level.org.springframework.boot.autoconfigure: ERROR
+
+spring:
+  datasource:
+    #分库1
+    shardorder0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.80.128:3306/shard_order_0?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=UTC
+        username: root
+        password: 111111
+    #分库2
+    shardorder1:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.80.128:3306/shard_order_1?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=UTC
+      username: root
+      password: 111111
