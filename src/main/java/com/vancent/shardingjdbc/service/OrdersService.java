@@ -1,7 +1,7 @@
 package com.vancent.shardingjdbc.service;
 
 import com.vancent.shardingjdbc.entity.Orders;
-import model.MOrderF;
+import com.vancent.shardingjdbc.model.MOrderF;
 
 import java.util.List;
 

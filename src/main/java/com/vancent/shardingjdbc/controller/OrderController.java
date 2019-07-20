@@ -7,7 +7,7 @@ import com.vancent.shardingjdbc.util.SnowFlake;
 import com.vancent.shardingjdbc.util.UUIDutil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import model.MOrderF;
+import com.vancent.shardingjdbc.model.MOrderF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

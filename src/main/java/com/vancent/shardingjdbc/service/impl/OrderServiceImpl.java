@@ -3,7 +3,7 @@ package com.vancent.shardingjdbc.service.impl;
 import com.vancent.shardingjdbc.dao.OrdersMapper;
 import com.vancent.shardingjdbc.entity.Orders;
 import com.vancent.shardingjdbc.service.OrdersService;
-import model.MOrderF;
+import com.vancent.shardingjdbc.model.MOrderF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

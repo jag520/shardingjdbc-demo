@@ -1,7 +1,7 @@
 package com.vancent.shardingjdbc.dao;
 
 import com.vancent.shardingjdbc.entity.Orders;
-import model.MOrderF;
+import com.vancent.shardingjdbc.model.MOrderF;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
